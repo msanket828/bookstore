@@ -3,6 +3,7 @@ export const getProductList = async (searchParams) => {
     `${process.env.REACT_APP_HOST}/444/products?name_like=${searchParams || ""}`
   );
   if (!response.ok) {
+    // eslint-disable-next-line no-throw-literal
     throw { message: response.statusText, status: response.status };
   }
   const data = await response.json();
@@ -14,6 +15,7 @@ export const getProduct = async (id) => {
     `${process.env.REACT_APP_HOST}/444/products/${id}`
   );
   if (!response.ok) {
+    // eslint-disable-next-line no-throw-literal
     throw { message: response.statusText, status: response.status };
   }
   const data = await response.json();
@@ -25,6 +27,7 @@ export const getFeaturedProduct = async () => {
     `${process.env.REACT_APP_HOST}/444/featured_products`
   );
   if (!response.ok) {
+    // eslint-disable-next-line no-throw-literal
     throw { message: response.statusText, status: response.status };
   }
   const data = await response.json();
