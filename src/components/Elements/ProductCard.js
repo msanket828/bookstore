@@ -4,17 +4,8 @@ import { useCart } from "../../context";
 import { Rating } from "./Rating";
 
 export const ProductCard = ({ product }) => {
-  const {
-    poster,
-    name,
-    id,
-    rating,
-    overview,
-    inCart,
-    in_stock,
-    price,
-    best_seller,
-  } = product;
+  const { poster, name, id, rating, overview, in_stock, price, best_seller } =
+    product;
   const { addToCart, removeFromCart, cartList } = useCart();
   const [in_cart, setIn_cart] = useState(false);
 
