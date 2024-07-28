@@ -8,8 +8,6 @@ export const Checkout = ({ setCheckout }) => {
   const navigate = useNavigate();
   const { cartList, total, clearCart } = useCart();
   const [user, setUser] = useState({});
-  const token = JSON.parse(sessionStorage.getItem("token"));
-  const cbid = JSON.parse(sessionStorage.getItem("cbid"));
   const handleOrderSubmit = async (e) => {
     e.preventDefault();
     try {

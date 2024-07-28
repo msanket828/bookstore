@@ -43,7 +43,7 @@ export const getUserOrders = async () => {
 };
 
 export const createOrder = async (cartList, total, user) => {
-  const { token, cbid } = getSession();
+  const { token } = getSession();
   const order = {
     cartList,
     amount_paid: total,
