@@ -4,6 +4,8 @@ import { FilterBar } from "./components/FilterBar";
 import { useLocation } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 import { useFilter } from "../../context/FilterContext";
+import { getProductList } from "../../services";
+import { toast } from "react-toastify";
 
 export const ProductList = () => {
   const [show, setShow] = useState(false);
@@ -14,11 +16,12 @@ export const ProductList = () => {
 
   useEffect(() => {
     async function fetchProducts() {
-      const response = await fetch(
-        `http://localhost:3000/products?name_like=${searchParams || ""}`
-      );
-      const data = await response.json();
-      initialiseProductList(data);
+      try {
+        const data = await getProductList(searchParams);
+        initialiseProductList(data);
+      } catch (error) {
+        toast.error(error.message, { position: "bottom-center" });
+      }
     }
     fetchProducts();
   }, [searchParams]);

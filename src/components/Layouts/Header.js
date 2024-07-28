@@ -3,13 +3,16 @@ import Logo from "../../images/logo192.png";
 import { Link } from "react-router-dom";
 import { DropdownLogIn, DropdownLogout } from "../index";
 import Search from "../Sections/Search";
+import { useCart } from "../../context";
 
 export const Header = () => {
+  const { cartList } = useCart();
   const [searchSection, setSearchSection] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem("darkMode")) || false
   );
+  const token = JSON.parse(sessionStorage.getItem("token"));
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
     if (darkMode) {
@@ -40,7 +43,7 @@ export const Header = () => {
             <Link to="/cart" className="text-gray-700 dark:text-white mr-5">
               <span className="text-2xl bi bi-cart-fill relative">
                 <span className="text-white text-sm absolute -top-1 left-2.5 bg-rose-500 px-1 rounded-full ">
-                  {/* {cartList.length} */}0
+                  {cartList.length}
                 </span>
               </span>
             </Link>
@@ -49,7 +52,7 @@ export const Header = () => {
               className="bi bi-person-circle cursor-pointer text-2xl text-gray-700 dark:text-white"
             ></span>
             {dropdown &&
-              (true ? (
+              (token ? (
                 <DropdownLogIn setDropdown={setDropdown} />
               ) : (
                 <DropdownLogout setDropdown={setDropdown} />

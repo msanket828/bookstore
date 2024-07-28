@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Rating } from "./Rating";
+import { useCart } from "../../context";
 
-export const ProductCard = (props) => {
+export const ProductCard = ({ product }) => {
   const {
     poster,
     name,
@@ -13,7 +14,18 @@ export const ProductCard = (props) => {
     in_stock,
     price,
     best_seller,
-  } = props.product;
+  } = product;
+  const { addToCart, removeFromCart, cartList } = useCart();
+  const [in_cart, setIn_cart] = useState(false);
+
+  useEffect(() => {
+    const mainProduct = cartList.find((_) => _.id === product.id);
+    if (mainProduct) {
+      setIn_cart(true);
+    } else {
+      setIn_cart(false);
+    }
+  }, [cartList, product.id]);
   return (
     <div className="m-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <Link to={`/products/${id}`} className="relative">
@@ -43,20 +55,22 @@ export const ProductCard = (props) => {
             <span>$</span>
             <span>{price}</span>
           </span>
-          {!inCart && (
+          {!in_cart && (
             <button
-              //   onClick={() => addToCart(product)}
+              onClick={() => addToCart(product)}
               className={`inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 ${
-                in_stock ? "" : "cursor-not-allowed"
+                in_stock
+                  ? ""
+                  : "bg-blue-300 hover:bg-blue-300 cursor-not-allowed"
               }`}
               disabled={in_stock ? "" : "disabled"}
             >
               Add To Cart <i className="ml-1 bi bi-plus-lg"></i>
             </button>
           )}
-          {inCart && (
+          {in_cart && (
             <button
-              //   onClick={() => removeFromCart(product)}
+              onClick={() => removeFromCart(product)}
               className={`inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 ${
                 in_stock ? "" : "cursor-not-allowed"
               }`}

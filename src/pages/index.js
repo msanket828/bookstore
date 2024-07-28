@@ -3,3 +3,7 @@ export { ProductList } from "./Product/ProductList";
 export { ProductDetail } from "./Product/ProductDetail";
 export { Signup } from "./Signup";
 export { Login } from "./Login";
+export { Cartpage } from "./Cart/Cartpage";
+export { Orderpage } from "./Order/Orderpage";
+export { Dashboardpage } from "./Dashboard/Dashboardpage";
+export { Pagenotfound } from "./Pagenotfound";

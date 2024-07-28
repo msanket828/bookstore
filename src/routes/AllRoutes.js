@@ -1,12 +1,17 @@
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import {
+  Cartpage,
+  Dashboardpage,
   Homepage,
-  ProductList,
-  ProductDetail,
-  Signup,
   Login,
+  Orderpage,
+  Pagenotfound,
+  ProductDetail,
+  ProductList,
+  Signup,
 } from "../pages/index";
+import { ProtectedRoute } from "./ProtectedRoute";
 const AllRoutes = () => {
   return (
     <Routes>
@@ -14,7 +19,32 @@ const AllRoutes = () => {
       <Route path="/products" element={<ProductList />} />
       <Route path="/products/:id" element={<ProductDetail />} />
       <Route path="/register" element={<Signup />} />
-      <Route pth="/login" element={<Login />} />
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/cart"
+        element={
+          <ProtectedRoute>
+            <Cartpage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/order-summary"
+        element={
+          <ProtectedRoute>
+            <Orderpage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboardpage />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="*" element={<Pagenotfound />} />
     </Routes>
   );
 };
