@@ -17,8 +17,11 @@ export const getUser = async () => {
     requestData
   );
   if (!response.ok) {
-    // eslint-disable-next-line no-throw-literal
-    throw { message: response.statusText, status: response.status };
+    const errorMessage = {
+      message: response.statusText,
+      status: response.status,
+    };
+    throw errorMessage;
   }
   const data = await response.json();
   return data;
@@ -37,8 +40,11 @@ export const getUserOrders = async () => {
     }
   );
   if (!response.ok) {
-    // eslint-disable-next-line no-throw-literal
-    throw { message: response.statusText, status: response.status };
+    const errorMessage = {
+      message: response.statusText,
+      status: response.status,
+    };
+    throw errorMessage;
   }
   const data = await response.json();
   return data;
@@ -65,8 +71,11 @@ export const createOrder = async (cartList, total, user) => {
     body: JSON.stringify(order),
   });
   if (!response.ok) {
-    // eslint-disable-next-line no-throw-literal
-    throw { message: response.statusText, status: response.status };
+    const errorMessage = {
+      message: response.statusText,
+      status: response.status,
+    };
+    throw errorMessage;
   }
   const data = await response.json();
   return data;
