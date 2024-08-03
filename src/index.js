@@ -7,8 +7,8 @@ import "../node_modules/bootstrap-icons/font/bootstrap-icons.min.css";
 import { ScrollTop } from "./components";
 import { FilterProvider } from "./context/FilterContext";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { CartProvider } from "./context";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
